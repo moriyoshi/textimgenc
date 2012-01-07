@@ -26,7 +26,9 @@ function encimg(str) {
     cv.width = width;
     cv.height = 1;
     var ctx = cv.getContext('2d');
-    var imd = ctx.createImageData(width, 1), imdd = imd.data;
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(0, 0, width, 1);
+    var imd = ctx.getImageData(0, 0, width, 1), imdd = imd.data;
     for (var i = 0, j = 0; i < buf.length; i++) {
         imdd[j++] = buf[i];
         if (!(j & 3 ^ 3))
