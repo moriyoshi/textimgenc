@@ -1,0 +1,98 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script type="text/javascript" src="decimg.js"></script>
+  <script type="text/javascript" src="encimg.js"></script>
+  <style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Quantico:400,700);
+body {
+  font-size: 20px;
+  text-align: center;
+  background-color: #eef;
+}
+
+button {
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid black;
+  margin: 0 0;
+  padding: 4px 4px;
+  text-height: 1em;
+  display: inline-block;
+  background-color: #eee;
+}
+
+button:hover {
+  background-color: #fff;
+}
+
+button:active {
+  background-color: #ff0;
+}
+
+body, button {
+  font-family: Quantico, Helvetica, Arial;
+}
+
+.page {
+  width: 640px;
+  margin: auto auto;
+  text-align: center;
+}
+
+.buttonset {
+  padding: 16px 0;
+}
+
+label {
+  display: block;
+}
+
+textarea {
+  width: 40em;
+  height: 20em;
+}
+
+</style>
+</head>
+<body>
+  <div class="page">
+    <form>
+      <div>
+        <label for="text">Original Text</label>
+        <textarea name="text" id="text"></textarea>
+      </div>
+      <div class="buttonset">
+        <button id="encode_button">↓encode</button>
+        <button id="decode_button">↑decode</button>
+      </div>
+      <div>
+        <label for="dataurl">data URL</label>
+        <textarea name="dataurl" id="dataurl">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAABCAIAAACUgoPjAAAAEklEQVR4nGN83NzG8N+YgfE8ABZpA/Cma4j9AAAAAElFTkSuQmCC</textarea>
+      </div>
+    </form>
+    <script type="text/javascript">
+      (function() {
+        function decode() {
+          var im = new Image();
+          im.onload = function() {
+            document.getElementById('text').value = decimg(im);
+          };
+          im.src = document.getElementById('dataurl').value;
+        }
+        function encode() {
+          document.getElementById('dataurl').value = encimg(document.getElementById('text').value);
+        }
+        document.getElementById('encode_button').onclick = function() {
+          encode();
+          return false;
+        };
+        document.getElementById('decode_button').onclick = function() {
+          decode();
+          return false;
+        };
+      })();
+    </script>
+  </div>
+</body>
+</html>
